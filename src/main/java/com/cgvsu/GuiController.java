@@ -1,5 +1,6 @@
 package com.cgvsu;
 
+import com.cgvsu.objreader.IncorrectFileException;
 import com.cgvsu.render_engine.RenderEngine;
 import javafx.fxml.FXML;
 import javafx.animation.Animation;
@@ -81,8 +82,9 @@ public class GuiController {
             String fileContent = Files.readString(fileName);
             mesh = ObjReader.read(fileContent);
             // todo: обработка ошибок
-        } catch (IOException exception) {
-
+        }
+        catch (IncorrectFileException | IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
